@@ -41,21 +41,22 @@ class Solution_dfs {
 };
 }
 
-int main() {
-  similar_tree_google::TreeNode* r1 = new similar_tree_google::TreeNode(1);
-  similar_tree_google::TreeNode* r2 = new similar_tree_google::TreeNode(1);
-  r1->left = new similar_tree_google::TreeNode(2);
-  r1->right = new similar_tree_google::TreeNode(3);
-  r1->left->left = new similar_tree_google::TreeNode(4);
-  r1->left->right = new similar_tree_google::TreeNode(5);
-  r1->right->left = new similar_tree_google::TreeNode(6);
-  r1->right->right = new similar_tree_google::TreeNode(7);
-  r2->left = new similar_tree_google::TreeNode(3);
-  r2->right = new similar_tree_google::TreeNode(2);
-  r2->left->left = new similar_tree_google::TreeNode(7);
-  r2->left->right = new similar_tree_google::TreeNode(6);
-  r2->right->left = new similar_tree_google::TreeNode(5);
-  r2->right->right = new similar_tree_google::TreeNode(4);
+int main_similar_tree_google() {
+  using namespace similar_tree_google;
+  TreeNode* r1 = new TreeNode(1);
+  TreeNode* r2 = new TreeNode(1);
+  r1->left = new TreeNode(2);
+  r1->right = new TreeNode(3);
+  r1->left->left = new TreeNode(4);
+  r1->left->right = new TreeNode(5);
+  r1->right->left = new TreeNode(6);
+  r1->right->right = new TreeNode(7);
+  r2->left = new TreeNode(3);
+  r2->right = new TreeNode(2);
+  r2->left->left = new TreeNode(7);
+  r2->left->right = new TreeNode(6);
+  r2->right->left = new TreeNode(5);
+  r2->right->right = new TreeNode(4);
   if ((new similar_tree_google::Solution_dfs())->isSimilar(r1, r2))
     cout << "true";
   else
