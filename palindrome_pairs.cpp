@@ -79,7 +79,7 @@ public:
 };
 }
 
-int main() {
+int main_palindrome_pairs() {
   vector<string> words;
   words.push_back("a");
   words.push_back("");
