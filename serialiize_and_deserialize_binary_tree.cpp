@@ -37,7 +37,8 @@ public:
                 Q.push(cur->right);
             }
         }
-        text.pop_back();
+        while (text.back() == '#' || text.back() == ',')
+          text.pop_back();
         return text;
     }
 
@@ -51,7 +52,7 @@ public:
         queue<TreeNode*> Q;
         Q.push(root);
         int index = 1;
-        while (Q.size()) {
+        while (Q.size() && index < nodes.size()) {
             TreeNode* cur = Q.front();
             Q.pop();
             if (nodes[index] != "#") {
@@ -59,7 +60,7 @@ public:
                 Q.push(cur->left);
             }
             index++;
-            if (nodes[index] != "#") {
+            if (index < nodes.size() && nodes[index] != "#") {
                 cur->right = new TreeNode(atoi(nodes[index].c_str()));
                 Q.push(cur->right);
             }
@@ -90,4 +91,5 @@ int main_serilize_and_deserialize_binary_tree() {
   root->right->right = new TreeNode(5);
   string text = (new Codec())->serialize(root);
   cout << text << endl;
+
 }
