@@ -79,4 +79,33 @@ private:
     stack<vector<NestedInteger>::iterator> r_end;
     vector<NestedInteger>::iterator start, end;
 };
+
+class NestedIterator2{
+ public:
+  NestedIterator2(vector<NestedInteger> &nestedList) {
+      for (int i = nestedList.size()-1; i >= 0; i--)
+          record.push(nestedList[i]);
+  }
+
+  int next() {
+      int num = record.top().getInteger();
+      record.pop();
+      return num;
+  }
+
+  bool hasNext() {
+      if (record.empty())
+          return false;
+      while (record.size() && record.top().isInteger() == false) {
+          NestedInteger top = record.top();
+          record.pop();
+          for (int i = top.getList().size()-1; i >= 0; i--) {
+              record.push(top.getList()[i]);
+          }
+      }
+      return record.empty()? false : true;
+  }
+private:
+  stack<NestedInteger> record;
+};
 }

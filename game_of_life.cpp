@@ -76,42 +76,47 @@ class hashfunc {
   }
 };
 
-/*class followUp {
+class Solution_followp {
+    struct pair_hash {
+        inline size_t operator()(const pair<int,int>& v) const {
+            return v.first*31+v.second;
+        }
+    };
 public:
-  void gameOfLife(vector<vector<int> >& board) {
-    if (board.empty() || board[0].empty())
-      return;
-    unordered_set<Cell, hashfunc> live;
-    int m = board.size();
-    int n = board[0].size();
-    for (int i=0; i<m; i++) {
-      for (int j=0; j<n; j++) {
-        if (board[i][j] == 1)
-          live.insert(Cell(i, j));
-      }
+    void gameOfLife(vector<vector<int> >& board) {
+        if (board.empty() || board[0].empty())
+          return;
+        unordered_set<pair<int,int>, pair_hash> live;
+        int m = board.size();
+        int n = board[0].size();
+        for (int i=0; i<m; i++) {
+          for (int j=0; j<n; j++) {
+            if (board[i][j] == 1)
+              live.insert(make_pair(i,j));
+          }
+        }
+        unordered_map<pair<int,int>, int, pair_hash> record;
+        int dx[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+        for (auto cell : live) {
+          for (int i=0; i<8; i++) {
+            if (cell.first+dx[i] >= 0 && cell.first+dx[i] < m && cell.second+dy[i] >= 0 && cell.second+dy[i] < n)
+              record[make_pair(cell.first+dx[i], cell.second+dy[i])]++;
+          }
+        }
+        unordered_set<pair<int,int>, pair_hash> newLive;
+        for (auto iter = record.begin(); iter != record.end(); iter++) {
+          if (iter->second == 3 || (iter->second == 2 && live.find(iter->first) != live.end()))
+            newLive.insert(iter->first);
+        }
+        for (int i=0; i < m; i++)
+          for (int j=0; j<n; j++)
+              board[i][j] = 0;
+        for (auto cell : newLive) {
+          board[cell.first][cell.second] = 1;
+        }
     }
-    unordered_map<Cell, int, hashfunc> record;
-    int dx[] = {-1, -1, -1, 0, 0, 1, 1, 1};
-    int dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
-    for (auto cell : live) {
-      for (int i=0; i<8; i++) {
-        if (cell.x+dx[i] >= 0 && cell.x+dx[i] < m && cell.y+dy[i] >= 0 && cell.y+dy[i] < n)
-          record[Cell(cell.x+dx[i], cell.y+dy[i])]++;
-      }
-    }
-    unordered_set<Cell, hashfunc> newLive;
-    for (unordered_map<Cell, int, hashfunc>::iterator iter = record.begin(); iter != record.end(); iter++) {
-      if (iter->second == 3 || (iter->second == 2 && live.find(iter->first) != live.end()))
-        newLive.insert(iter->first);
-    }
-    for (int i=0; i < m; i++)
-      for (int j=0; j<n; j++)
-          board[i][j] = 0;
-    for (auto cell : newLive) {
-      board[cell.x][cell.y] = 1;
-    }
-  }
-};*/
+};
 }
 int main_game_of_life() {
   vector<vector<int> > board;
