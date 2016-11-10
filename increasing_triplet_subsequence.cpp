@@ -34,23 +34,26 @@ public:
         if (nums.size() < 3)
             return false;
         int index = nums.size()-2;
-        int maxFromRight = nums.back();
         while (index >= 0 && nums[index] >= nums[index+1]) {
-            if (nums[index] > maxFromRight)
-                maxFromRight = nums[index];
             index--;
         }
         if (index < 0)
             return false;
+        int maxFromRight = nums[index+1];
         int middle = nums[index--];
         while (index >= 0) {
-            if (nums[index] < middle)
+            if (nums[index] < middle) {
                 return true;
-            if (nums[index] > middle && nums[index] < maxFromRight)
-                middle = nums[index];
-            if (nums[index] > maxFromRight)
-                maxFromRight = nums[index];
-            index--;
+            } else if (nums[index] > middle && nums[index] < maxFromRight) {
+                middle = nums[index--];
+            } else if (nums[index] > maxFromRight) {
+                maxFromRight = nums[index--];
+                if (index >= 0) {
+                    middle = nums[index--];
+                }
+            } else {
+                index--;
+            }
         }
         return false;
     }

@@ -19,3 +19,41 @@ The output list must be sorted by the x position.
 There must be no consecutive horizontal lines of equal height in the output skyline. For instance, [...[2 3], [4 5], [7 5], [11 5], [12 7]...] is not acceptable; the three lines of height 5 should be merged into one in the final output as such: [...[2 3], [4 5], [12 7], ...]
  */
 
+#include <iostream>
+//#include <priority_queue>
+#include <vector>
+using namespace std;
+
+namespace skyline_problem {
+/*class Solution {
+public:
+    vector<pair<int, int>> getSkyline(vector<vector<int>>& buildings) {
+        vector<pair<int,int>> ans;
+        if (buildings.empty())
+            return ans;
+        priority_queue<pair<int,int>> Q;
+        int cur = 0, curX, curH;
+        while (cur < buildings.size() || Q.size()) {
+            if (Q.empty() || (cur < buildings.size() && buildings[cur][0] <= Q.top().second)) {
+                curX = buildings[cur][0];
+                while (cur < buildings.size() && buildings[cur][0] == curX) {
+                    Q.push(make_pair(buildings[cur][2], buildings[cur][1]));
+                    cur++;
+                }
+                curH = Q.top().first;
+                if (ans.empty() || ans.back().second != curH)
+                    ans.push_back(make_pair(curX, curH));
+            } else {
+                curX = Q.top().second;
+                while (Q.size() && Q.top().second <= curX)
+                    Q.pop();
+                curH = Q.empty()? 0 : Q.top().first;
+                if (ans.empty() || ans.back().second != curH)
+                    ans.push_back(make_pair(curX, curH));
+            }
+        }
+        return ans;
+    }
+};*/
+}
+

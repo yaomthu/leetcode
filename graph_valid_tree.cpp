@@ -80,7 +80,7 @@ public:
 };
 }
 
-int main() {
+int main_graph_valid_tree() {
   graph_valid_tree::Solution2 solution;
   vector<pair<int,int> > edges;
   edges.push_back(make_pair(0,1));
